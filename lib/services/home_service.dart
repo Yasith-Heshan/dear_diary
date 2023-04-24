@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dear_diary/models/diary_card.dart';
 import 'package:flutter/foundation.dart';
 
-class HomeService{
 
+class HomeService{
   CollectionReference diaryCardsCollection = FirebaseFirestore.instance.collection('diary_cards');
   Future<void> addDiaryCard(DiaryCard diaryCard)async {
 

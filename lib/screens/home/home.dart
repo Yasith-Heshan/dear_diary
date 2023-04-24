@@ -1,4 +1,5 @@
 import 'package:dear_diary/screens/home/widgets/add_card_form.dart';
+import 'package:dear_diary/screens/home/widgets/battery_status.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -65,12 +66,9 @@ class _HomeState extends State<Home> {
           children: const [
             Padding(
               padding: EdgeInsets.all(15.0),
-              child: Text('Battery Percentage: 80%',
-                style: TextStyle(
-                  color: Colors.white54,
-                ),
-              ),
+              child: BatteryStatus(),
             ),
+
             AddCardForm(),
           ],
         ),
