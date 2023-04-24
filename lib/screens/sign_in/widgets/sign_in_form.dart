@@ -3,7 +3,6 @@ import 'package:form_validator/form_validator.dart';
 import '../../../services/auth_service.dart';
 import '../../../shared/decorations.dart';
 import '../../signup/widgets/loading.dart';
-import '../../signup/sign_up_email.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -83,7 +82,7 @@ class _SignInFormState extends State<SignInForm> {
                           error = errorMsg;
                         });
                       } else {
-                        if (!context.mounted) return;
+                        if (!mounted) return;
                         await Navigator.pushReplacementNamed(
                             context, '/wrapper');
                       }
@@ -116,11 +115,9 @@ class _SignInFormState extends State<SignInForm> {
             height: 5,
           ),
           TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SignUpEmail()));
+              onPressed: () async{
+                if (!mounted) return;
+                await Navigator.pushReplacementNamed(context, '/sign_up_email');
               },
               child: const Text('Register')),
 

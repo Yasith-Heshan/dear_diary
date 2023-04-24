@@ -16,7 +16,7 @@ class ViewCard extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Card(
-            color: Color(0xA5CFE6FF),
+            color: const Color(0xA5CFE6FF),
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

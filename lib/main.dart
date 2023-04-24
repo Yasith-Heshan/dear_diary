@@ -30,11 +30,11 @@ class MyApp extends StatelessWidget {
         initialData: null,
         child: MaterialApp(
             routes: {
-              '/':(context)=>SignIn(),
-              '/sign_up_email': (context) => SignUpEmail(),
-              '/sign_up_password': (context) => SignUpPassword(),
-              '/wrapper': (context) => Wrapper(),
-              '/view_card':(context)=>ViewCard()
+              '/':(context)=>const SignIn(),
+              '/sign_up_email': (context) => const SignUpEmail(),
+              '/sign_up_password': (context) => const SignUpPassword(),
+              '/wrapper': (context) => const Wrapper(),
+              '/view_card':(context)=>const ViewCard()
             }
         )
     );

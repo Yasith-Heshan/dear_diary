@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
-
 import '../../../services/auth_service.dart';
 import '../../../shared/decorations.dart';
 import 'loading.dart';
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+class SignUpPasswordForm extends StatefulWidget {
+  const SignUpPasswordForm({Key? key}) : super(key: key);
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
+  State<SignUpPasswordForm> createState() => _SignUpPasswordFormState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
   String password='';
   bool isActive=false;
   String error = "";
@@ -65,13 +64,13 @@ class _SignUpFormState extends State<SignUpForm> {
                     loading = false;
                   });
                 }else{
-                  if (!context.mounted) return;
+                  if(!mounted)return;
                   await Navigator.pushReplacementNamed(context, '/wrapper');
                 }
               }
             }:null,
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-            child:loading? Loading(): Padding(
+            child:loading? const Loading(): Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -86,8 +85,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 ],
               ),
             ),
-
-          )
+          ),
+          TextButton(
+              onPressed: ()async{
+                 await Navigator.pushReplacementNamed(context,'/sign_up_email');
+              },
+              child: const Text('Back'))
         ],
       ),
     );

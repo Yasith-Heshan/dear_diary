@@ -21,6 +21,7 @@ class AddCardFormState extends State<AddCardForm> {
   final text1Controller = TextEditingController();
   final text2Controller = TextEditingController();
 
+  @override
   void dispose() {
     text1Controller.dispose();
     text2Controller.dispose();
@@ -64,7 +65,7 @@ class AddCardFormState extends State<AddCardForm> {
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  fillColor: Color(0xFF3097DAFF),
+                  fillColor: const Color(0xFF3097DAFF),
                   filled: true,
                   hintText: 'Submit New'
               ),

@@ -1,4 +1,4 @@
-import 'package:dear_diary/screens/signup/widgets/sign_up_form.dart';
+import 'package:dear_diary/screens/signup/widgets/sign_up_password_form.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,7 +17,6 @@ class _SignUpPasswordState extends State<SignUpPassword> {
 
     return Scaffold(
       backgroundColor: Colors.blue,
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(5),
         child: Center(
@@ -61,7 +60,7 @@ class _SignUpPasswordState extends State<SignUpPassword> {
                         const SizedBox(
                           height: 40,
                         ),
-                        const SignUpForm()
+                        const SignUpPasswordForm()
                       ],
                     ),
                   ),
