@@ -115,7 +115,7 @@ class _SignInFormState extends State<SignInForm> {
             height: 5,
           ),
           TextButton(
-              onPressed: () async{
+              onPressed: () async {
                 if (!mounted) return;
                 await Navigator.pushReplacementNamed(context, '/sign_up_email');
               },

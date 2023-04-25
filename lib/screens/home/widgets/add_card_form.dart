@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../models/auth_user.dart';
 import '../../../models/diary_card.dart';
 import '../../../services/home_service.dart';
@@ -16,7 +15,6 @@ class AddCardForm extends StatefulWidget {
 }
 
 class AddCardFormState extends State<AddCardForm> {
-
   final _formKey = GlobalKey<FormState>();
   final text1Controller = TextEditingController();
   final text2Controller = TextEditingController();
@@ -28,7 +26,7 @@ class AddCardFormState extends State<AddCardForm> {
     super.dispose();
   }
 
-  void clearText(){
+  void clearText() {
     text1Controller.clear();
     text2Controller.clear();
   }
@@ -38,14 +36,11 @@ class AddCardFormState extends State<AddCardForm> {
   String description = '';
   String subtitle = '';
 
-
   @override
   Widget build(BuildContext context) {
-
     final AuthUser? authUser = Provider.of<AuthUser?>(context);
     String email = authUser!.email;
     subtitle = email.split('@')[0];
-
 
     return Form(
       key: _formKey,
@@ -55,9 +50,9 @@ class AddCardFormState extends State<AddCardForm> {
           children: <Widget>[
             TextFormField(
               controller: text1Controller,
-              onChanged: (value){
+              onChanged: (value) {
                 setState(() {
-                  title=value;
+                  title = value;
                 });
               },
               decoration: InputDecoration(
@@ -67,19 +62,19 @@ class AddCardFormState extends State<AddCardForm> {
                   ),
                   fillColor: const Color(0xFF3097DAFF),
                   filled: true,
-                  hintText: 'Submit New'
-              ),
-
+                  hintText: 'Submit New'),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Visibility(
                 visible: visibility,
                 child: TextFormField(
                   controller: text2Controller,
                   maxLines: 5,
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
-                      description=value;
+                      description = value;
                     });
                   },
                   decoration: InputDecoration(
@@ -89,28 +84,25 @@ class AddCardFormState extends State<AddCardForm> {
                       ),
                       fillColor: const Color(0xFF3097DAFF),
                       filled: true,
-                      hintText:'Enter Description'
-                  ),
-                )
+                      hintText: 'Enter Description'),
+                )),
+            const SizedBox(
+              height: 10,
             ),
-            const SizedBox(height: 10,),
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 HomeService homeService = HomeService();
-                DiaryCard diaryCard = DiaryCard(title: title, subtitle: subtitle, description: description);
+                DiaryCard diaryCard = DiaryCard(
+                    title: title, subtitle: subtitle, description: description);
                 homeService.addDiaryCard(diaryCard);
                 clearText();
               },
               style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
-                  minimumSize: const Size(double.infinity, 40)
-              ),
+                  minimumSize: const Size(double.infinity, 40)),
               child: const Text(
                 'Submit',
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black
-                ),
+                style: TextStyle(fontSize: 18, color: Colors.black),
               ),
             ),
             const DiaryCardsList(),

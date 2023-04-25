@@ -10,7 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -28,16 +28,12 @@ class MyApp extends StatelessWidget {
     return StreamProvider<AuthUser?>.value(
         value: AuthService().authUser,
         initialData: null,
-        child: MaterialApp(
-            routes: {
-              '/':(context)=>const SignIn(),
-              '/sign_up_email': (context) => const SignUpEmail(),
-              '/sign_up_password': (context) => const SignUpPassword(),
-              '/wrapper': (context) => const Wrapper(),
-              '/view_card':(context)=>const ViewCard()
-            }
-        )
-    );
+        child: MaterialApp(routes: {
+          '/': (context) => const SignIn(),
+          '/sign_up_email': (context) => const SignUpEmail(),
+          '/sign_up_password': (context) => const SignUpPassword(),
+          '/wrapper': (context) => const Wrapper(),
+          '/view_card': (context) => const ViewCard()
+        }));
   }
 }
-

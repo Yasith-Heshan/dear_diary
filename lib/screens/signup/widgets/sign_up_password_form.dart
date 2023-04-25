@@ -12,30 +12,32 @@ class SignUpPasswordForm extends StatefulWidget {
 }
 
 class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
-  String password='';
-  bool isActive=false;
+  String password = '';
+  bool isActive = false;
   String error = "";
   bool loading = false;
 
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-
     String email = ModalRoute.of(context)!.settings.arguments as String;
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
           TextFormField(
-            validator:ValidationBuilder().regExp(RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'), 'Invalid Password').build(),
+            validator: ValidationBuilder()
+                .regExp(
+                    RegExp(
+                        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'),
+                    'Invalid Password')
+                .build(),
             obscureText: true,
             decoration: authTextInputDecoration.copyWith(hintText: 'Password*'),
-            onChanged: (value){
-
+            onChanged: (value) {
               setState(() {
                 password = value;
-                isActive = _formKey.currentState!.validate()?true:false;
-
+                isActive = _formKey.currentState!.validate() ? true : false;
               });
             },
           ),
@@ -44,51 +46,58 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
           ),
           Text(
             error,
-            style: const TextStyle(
-                color: Colors.red
-            ),
+            style: const TextStyle(color: Colors.red),
           ),
           const SizedBox(
             height: 25,
           ),
           ElevatedButton(
-            onPressed: (isActive)?() async {
-              if (_formKey.currentState!.validate()) {
-                setState(() {
-                  loading=true;
-                });
-                String errorMsg = await AuthService().signUP(email, password);
-                if(errorMsg!=''){
-                  setState(() {
-                    error=errorMsg;
-                    loading = false;
-                  });
-                }else{
-                  if(!mounted)return;
-                  await Navigator.pushReplacementNamed(context, '/wrapper');
-                }
-              }
-            }:null,
+            onPressed: (isActive)
+                ? () async {
+                    if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
+                      String errorMsg =
+                          await AuthService().signUP(email, password);
+                      if (errorMsg != '') {
+                        setState(() {
+                          error = errorMsg;
+                          loading = false;
+                        });
+                      } else {
+                        if (!mounted) return;
+                        await Navigator.pushReplacementNamed(
+                            context, '/wrapper');
+                      }
+                    }
+                  }
+                : null,
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-            child:loading? const Loading(): Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('CONTINUE',
-                    style: TextStyle(
-                        fontSize: 18
+            child: loading
+                ? const Loading()
+                : Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'CONTINUE',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(width: 5,),
-                  Icon(Icons.arrow_forward,),
-                ],
-              ),
-            ),
           ),
           TextButton(
-              onPressed: ()async{
-                 await Navigator.pushReplacementNamed(context,'/sign_up_email');
+              onPressed: () async {
+                await Navigator.pushReplacementNamed(context, '/sign_up_email');
               },
               child: const Text('Back'))
         ],

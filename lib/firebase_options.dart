@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '408096567648',
     projectId: 'dear-diary-yasithh',
     storageBucket: 'dear-diary-yasithh.appspot.com',
-    iosClientId: '408096567648-om7doets45blqfkni89n7srbgttkncd5.apps.googleusercontent.com',
+    iosClientId:
+        '408096567648-om7doets45blqfkni89n7srbgttkncd5.apps.googleusercontent.com',
     iosBundleId: 'com.example.dearDiary',
   );
 }

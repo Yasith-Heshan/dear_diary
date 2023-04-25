@@ -25,19 +25,14 @@ class ViewCard extends StatelessWidget {
                   children: [
                     Text(
                       diaryCard.subtitle,
-                      style: TextStyle(
-                          color: Colors.grey[700],
-                        fontSize: 20
-                      ),
+                      style: TextStyle(color: Colors.grey[700], fontSize: 20),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     Text(
-                        diaryCard.description,
-                      style: const TextStyle(
-                        fontSize: 18
-                      ),
+                      diaryCard.description,
+                      style: const TextStyle(fontSize: 18),
                     )
                   ],
                 ),

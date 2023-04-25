@@ -6,7 +6,6 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       color: Colors.blue,
       child: const Center(
@@ -14,7 +13,7 @@ class Loading extends StatelessWidget {
           padding: EdgeInsets.all(15.0),
           child: SpinKitWanderingCubes(
             color: Colors.white,
-            size: 25.0 ,
+            size: 25.0,
           ),
         ),
       ),

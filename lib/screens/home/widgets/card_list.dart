@@ -11,28 +11,26 @@ class DiaryCardsList extends StatefulWidget {
 }
 
 class _DiaryCardsListState extends State<DiaryCardsList> {
-
   List<CardWidget> diaryCards = [];
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<DiaryCard>>(
-      stream: HomeService().diaryCards,
-      builder: (context, snapshot) {
-        if(snapshot.hasData){
-          diaryCards = snapshot.data!.map(
-              (diaryCard)=>CardWidget(
-                  title: diaryCard.title,
-                  subtitle: diaryCard.subtitle,
-                  description: diaryCard.description)
-          ).toList();
-        }
-        return ListView(
+        stream: HomeService().diaryCards,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            diaryCards = snapshot.data!
+                .map((diaryCard) => CardWidget(
+                    title: diaryCard.title,
+                    subtitle: diaryCard.subtitle,
+                    description: diaryCard.description))
+                .toList();
+          }
+          return ListView(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            children:diaryCards,
-        );
-      }
-    );
+            children: diaryCards,
+          );
+        });
   }
 }

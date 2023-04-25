@@ -9,13 +9,12 @@ class Wrapper extends StatelessWidget {
   const Wrapper({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final AuthUser? authUser = Provider.of<AuthUser?>(context);
-    if(authUser==null){
+    if (authUser == null) {
       return const SignIn();
-    }else{
+    } else {
       return const Home();
     }
   }
-
 }

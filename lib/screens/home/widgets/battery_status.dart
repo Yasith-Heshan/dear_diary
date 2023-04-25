@@ -11,21 +11,30 @@ class BatteryStatus extends StatefulWidget {
 
 class _BatteryStatusState extends State<BatteryStatus> {
   String _batteryLevel = 'Unknown battery level.';
-  Future<void> updateBatteryLevel()async {
-    String batteryLevel = await BatteryService().getBatteryLevel();
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
+  int _currentBatteryLevel = -1;
+  Future<void> updateBatteryLevel() async {
+    int batteryLevel = await BatteryService().getBatteryLevel();
+    if (batteryLevel == -1) {
+      _batteryLevel = 'Failed to update battery level';
+    } else if (_currentBatteryLevel != batteryLevel) {
+      setState(() {
+        _currentBatteryLevel = batteryLevel;
+        _batteryLevel = 'Battery Percentage: $_currentBatteryLevel';
+      });
+    }
   }
+
+  @override
+  initState() {
+    super.initState();
+    updateBatteryLevel();
+  }
+
   @override
   Widget build(BuildContext context) {
-    updateBatteryLevel();
     return Text(
-              _batteryLevel,
-            style: const TextStyle(
-              color: Colors.white54,
-              fontSize: 20
-            ),
-          );
+      _batteryLevel,
+      style: const TextStyle(color: Colors.white54, fontSize: 20),
+    );
   }
 }
