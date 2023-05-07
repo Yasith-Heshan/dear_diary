@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 
-class BatteryService {
+class BatteryRepository {
   static const platform = MethodChannel('samples.flutter.dev/battery');
 
   Future<int> getBatteryLevel() async {
@@ -13,7 +13,6 @@ class BatteryService {
       // batteryLevel = "Failed to get battery level: '${e.message}'.";
       batteryLevel = -1;
     }
-    print(batteryLevel);
     return batteryLevel;
   }
 }

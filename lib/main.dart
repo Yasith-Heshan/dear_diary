@@ -1,13 +1,13 @@
-import 'package:dear_diary/screens/home/view_card.dart';
-import 'package:dear_diary/screens/sign_in/sign_in.dart';
-import 'package:dear_diary/screens/signup/sign_up_email.dart';
-import 'package:dear_diary/screens/signup/sign_up_password.dart';
-import 'package:dear_diary/screens/wrapper.dart';
-import 'package:dear_diary/services/auth_service.dart';
-import 'package:dear_diary/models/auth_user.dart';
+import 'package:dear_diary/notes/view/view_card.dart';
+import 'package:dear_diary/repository/auth_repository.dart';
+import 'package:dear_diary/authentication/wrapper.dart';
+import 'package:dear_diary/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'authentication/view/sign_in/sign_in.dart';
+import 'authentication/view/signup/sign_up_email.dart';
+import 'authentication/view/signup/sign_up_password.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,20 +20,47 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final AuthRepository _authRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    _authRepository = AuthRepository();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return StreamProvider<AuthUser?>.value(
-        value: AuthService().authUser,
-        initialData: null,
-        child: MaterialApp(routes: {
-          '/': (context) => const SignIn(),
-          '/sign_up_email': (context) => const SignUpEmail(),
-          '/sign_up_password': (context) => const SignUpPassword(),
-          '/wrapper': (context) => const Wrapper(),
-          '/view_card': (context) => const ViewCard()
-        }));
+    return RepositoryProvider.value(
+      value: _authRepository,
+      child: GestureDetector(
+        onTap: (){
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: MaterialApp(routes: {
+            '/': (context) => const Wrapper(),
+            '/sign_up_email': (context) => const SignUpEmail(),
+            '/sign_up_password': (context) => const SignUpPassword(),
+            '/view_card': (context) => const ViewCard()
+          },
+          theme: AppTheme.lightTheme
+          ),
+        ),
+      ),
+    );
   }
 }
