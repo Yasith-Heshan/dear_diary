@@ -17,7 +17,6 @@ class _HomeState extends State<Home> {
   late final NotesRepository _notesRepository;
   late final BatteryRepository _batteryRepository;
 
-
   @override
   void initState() {
     super.initState();
@@ -33,10 +32,7 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         title: Text(
           'Home',
-          style: Theme
-              .of(context)
-              .textTheme
-              .headlineMedium,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         actions: [
           IconButton(
@@ -55,14 +51,12 @@ class _HomeState extends State<Home> {
                 default:
               }
             },
-            itemBuilder: (BuildContext context) =>
-            <PopupMenuEntry<String>>[
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               PopupMenuItem<String>(
                   child: Text(
-                      context.read<SignInCubit>().state.authUser!.email.split('@')[0],
-                  )
-              ),
-             const PopupMenuItem(child: Divider()),
+                context.read<SignInCubit>().state.authUser!.email.split('@')[0],
+              )),
+              const PopupMenuItem(child: Divider()),
               const PopupMenuItem<String>(
                 value: 'sign_out',
                 child: Text('Sign Out'),
@@ -77,15 +71,14 @@ class _HomeState extends State<Home> {
       body: RepositoryProvider.value(
         value: _notesRepository,
         child: BlocProvider(
-          create: (context) =>
-              NoteCubit(notesRepository: _notesRepository),
+          create: (context) => NoteCubit(notesRepository: _notesRepository),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BlocProvider(
-                  create: (context) =>
-                  BatteryCubit(_batteryRepository)..batteryPercentageFetchingStarted(),
+                  create: (context) => BatteryCubit(_batteryRepository)
+                    ..batteryPercentageFetchingStarted(),
                   child: const Padding(
                     padding: EdgeInsets.all(15.0),
                     child: BatteryStatus(),

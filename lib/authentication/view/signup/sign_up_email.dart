@@ -14,7 +14,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(RepositoryProvider.of<AuthRepository>(context)),
+      create: (context) =>
+          RegisterCubit(RepositoryProvider.of<AuthRepository>(context)),
       child: Scaffold(
         backgroundColor: Colors.blue,
         body: Padding(
@@ -33,10 +34,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
                     const SizedBox(
                       width: 10.0,
                     ),
-                    Text(
-                      'Dear Diary',
-                      style: Theme.of(context).textTheme.bodyLarge
-                    ),
+                    Text('Dear Diary',
+                        style: Theme.of(context).textTheme.bodyLarge),
                   ]),
                   const SizedBox(
                     height: 20,
@@ -49,10 +48,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 50),
                       child: Column(
                         children: [
-                          Text(
-                            'Sign Up',
-                            style:Theme.of(context).textTheme.headlineLarge
-                          ),
+                          Text('Sign Up',
+                              style: Theme.of(context).textTheme.headlineLarge),
                           const SizedBox(
                             height: 40,
                           ),

@@ -16,7 +16,6 @@ class _SignInFormState extends State<SignInForm> {
   String password = '';
   bool isActive = false;
 
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -70,29 +69,31 @@ class _SignInFormState extends State<SignInForm> {
             onPressed: (isActive)
                 ? () async {
                     if (_formKey.currentState!.validate()) {
-                      context.read<SignInCubit>().signInStarted(email: email, password: password);
+                      context
+                          .read<SignInCubit>()
+                          .signInStarted(email: email, password: password);
                     }
                   }
                 : null,
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'CONTINUE',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                        ),
-                      ],
-                    ),
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'CONTINUE',
+                    style: TextStyle(fontSize: 18),
                   ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                  ),
+                ],
+              ),
+            ),
           ),
           const SizedBox(
             height: 5,

@@ -39,22 +39,22 @@ class _CardWidgetState extends State<CardWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.title,
-                style: Theme.of(context).textTheme.titleLarge
-              ),
-              Text(
-                widget.subtitle,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.grey[700]
-                )
-              ),
+              Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
+              Text(widget.subtitle,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.grey[700])),
               const SizedBox(
                 height: 10,
               ),
-              Text(showingDesc,style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontSize: 15
-              ),),
+              Text(
+                showingDesc,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 15),
+              ),
               Visibility(
                   visible: showMoreVisibility,
                   child: TextButton(

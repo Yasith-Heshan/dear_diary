@@ -2,8 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../authentication/model/auth_user.dart';
 
-
-enum AuthenticationStatus {unknown,loading, authenticated, unauthenticated}
+enum AuthenticationStatus { unknown, loading, authenticated, unauthenticated }
 
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,16 +13,18 @@ class AuthRepository {
 
   Stream<AuthenticationStatus> get authStatus {
     return _auth.authStateChanges().map((User? user) {
-      return user!=null? AuthenticationStatus.authenticated: AuthenticationStatus.unauthenticated;
+      return user != null
+          ? AuthenticationStatus.authenticated
+          : AuthenticationStatus.unauthenticated;
     });
   }
 
-  AuthUser? getCurrentUser(){
+  AuthUser? getCurrentUser() {
     AuthUser? authUser = _userFromFirebaseUser(_auth.currentUser);
     return authUser;
   }
 
-  Future<void> signOut()async{
+  Future<void> signOut() async {
     await _auth.signOut();
   }
 
@@ -49,7 +50,7 @@ class AuthRepository {
   Future<String> signUP(String email, String password) async {
     try {
       final credential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -68,5 +69,4 @@ class AuthRepository {
     }
     return 'Unexpected Error';
   }
-
 }

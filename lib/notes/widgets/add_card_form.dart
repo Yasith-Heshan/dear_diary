@@ -97,19 +97,19 @@ class AddCardFormState extends State<AddCardForm> {
                           title: title,
                           subtitle: subtitle,
                           description: description);
-                      context
-                          .read<NoteCubit>()
-                          .noteAddingStarted(note: note);
+                      context.read<NoteCubit>().noteAddingStarted(note: note);
                       clearText();
                     }
                   },
                   style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                       minimumSize: const Size(double.infinity, 40)),
-                  child: state.status==NoteStatus.loading? const Loading(): const Text(
-                    'Submit',
-                    style: TextStyle(fontSize: 18, color: Colors.black),
-                  ),
+                  child: state.status == NoteStatus.loading
+                      ? const Loading()
+                      : const Text(
+                          'Submit',
+                          style: TextStyle(fontSize: 18, color: Colors.black),
+                        ),
                 );
               },
             ),

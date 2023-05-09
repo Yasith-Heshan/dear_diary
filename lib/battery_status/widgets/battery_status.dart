@@ -11,26 +11,23 @@ class BatteryStatus extends StatefulWidget {
 }
 
 class _BatteryStatusState extends State<BatteryStatus> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BatteryCubit, BatteryState>(
       builder: (context, state) {
         String batteryLevel = 'Unknown battery level.';
-        if(state.batteryPercentageFetchingStatus==BatteryPercentageFetchingStatus.initial){
+        if (state.batteryPercentageFetchingStatus ==
+            BatteryPercentageFetchingStatus.initial) {
           return const Loading();
-        }
-        else if(state.batteryPercentageFetchingStatus==BatteryPercentageFetchingStatus.succeeded){
+        } else if (state.batteryPercentageFetchingStatus ==
+            BatteryPercentageFetchingStatus.succeeded) {
           batteryLevel = 'Battery percentage: ${state.batteryPercentage}';
-        }else{
+        } else {
           batteryLevel = state.error;
         }
         return Text(
           batteryLevel,
-          style: Theme
-              .of(context)
-              .textTheme
-              .headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall,
         );
       },
     );

@@ -1,34 +1,34 @@
 part of 'battery_cubit.dart';
 
-enum BatteryPercentageFetchingStatus{
+enum BatteryPercentageFetchingStatus {
   initial,
   loading,
   succeeded,
   failed,
 }
-class BatteryState extends Equatable{
+
+class BatteryState extends Equatable {
   final int batteryPercentage;
   final BatteryPercentageFetchingStatus batteryPercentageFetchingStatus;
   final String error;
 
   const BatteryState(
-      {required this.error, required this.batteryPercentage,
-        required this.batteryPercentageFetchingStatus
-      });
+      {required this.error,
+      required this.batteryPercentage,
+      required this.batteryPercentageFetchingStatus});
 
   BatteryState copyWith(
-  {
-    required int batteryPercentage,
-    required BatteryPercentageFetchingStatus batteryPercentageFetchingStatus
-}
-      ){
-    return BatteryState(batteryPercentage: batteryPercentage, batteryPercentageFetchingStatus: batteryPercentageFetchingStatus, error: '');
+      {required int batteryPercentage,
+      required BatteryPercentageFetchingStatus
+          batteryPercentageFetchingStatus}) {
+    return BatteryState(
+        batteryPercentage: batteryPercentage,
+        batteryPercentageFetchingStatus: batteryPercentageFetchingStatus,
+        error: '');
   }
 
   @override
   // TODO: implement props
-  List<Object?> get props => [batteryPercentage,batteryPercentageFetchingStatus,error];
+  List<Object?> get props =>
+      [batteryPercentage, batteryPercentageFetchingStatus, error];
 }
-
-
-

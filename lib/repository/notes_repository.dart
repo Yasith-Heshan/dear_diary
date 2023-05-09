@@ -1,28 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../notes/models/note.dart';
 
-
-class NotesRepository{
+class NotesRepository {
   CollectionReference notesCollection =
-  FirebaseFirestore.instance.collection('diary_cards');
+      FirebaseFirestore.instance.collection('diary_cards');
 
   Future<String> addNote(Note note) async {
     final dc = note.toMap();
     String error = '';
     try {
-     await notesCollection.add(dc);
+      await notesCollection.add(dc);
     } catch (e) {
       error = 'Unexpected error';
-      }
-
-      return error;
     }
 
+    return error;
+  }
 
   List<Note> _notesFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.docs
-        .map((doc) => Note.fromDoc(doc))
-        .toList();
+    return snapshot.docs.map((doc) => Note.fromDoc(doc)).toList();
   }
 
   Stream<List<Note>> get notes {
@@ -30,6 +26,4 @@ class NotesRepository{
         .snapshots()
         .map((snapshot) => _notesFromSnapshot(snapshot));
   }
-
 }
-

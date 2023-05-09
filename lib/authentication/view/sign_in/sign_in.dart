@@ -29,10 +29,8 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     width: 10.0,
                   ),
-                   Text(
-                    'Dear Diary',
-                    style: Theme.of(context).textTheme.bodyLarge
-                  ),
+                  Text('Dear Diary',
+                      style: Theme.of(context).textTheme.bodyLarge),
                 ]),
                 const SizedBox(
                   height: 20,
@@ -45,10 +43,8 @@ class _SignInState extends State<SignIn> {
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
                     child: Column(
                       children: [
-                        Text(
-                          'Sign In',
-                          style:Theme.of(context).textTheme.headlineLarge
-                        ),
+                        Text('Sign In',
+                            style: Theme.of(context).textTheme.headlineLarge),
                         const SizedBox(
                           height: 30,
                         ),

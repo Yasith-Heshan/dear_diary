@@ -40,9 +40,9 @@ class _MyAppState extends State<MyApp> {
     return RepositoryProvider.value(
       value: _authRepository,
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
+          if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
         },
@@ -55,9 +55,7 @@ class _MyAppState extends State<MyApp> {
             '/sign_up_email': (context) => const SignUpEmail(),
             '/sign_up_password': (context) => const SignUpPassword(),
             '/view_card': (context) => const ViewCard()
-          },
-          theme: AppTheme.lightTheme
-          ),
+          }, theme: AppTheme.lightTheme),
         ),
       ),
     );

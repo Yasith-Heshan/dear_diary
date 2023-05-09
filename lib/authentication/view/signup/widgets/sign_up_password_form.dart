@@ -29,12 +29,11 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
           if (!mounted) return;
           await Navigator.pushNamedAndRemoveUntil(
               context, '/', ModalRoute.withName('sign_up_password'));
-        }else if(status == RegistrationStatus.loading){
+        } else if (status == RegistrationStatus.loading) {
           setState(() {
             loading = true;
           });
-        }
-        else if(status == RegistrationStatus.failed){
+        } else if (status == RegistrationStatus.failed) {
           setState(() {
             loading = false;
           });
@@ -47,13 +46,13 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
             TextFormField(
               validator: ValidationBuilder()
                   .regExp(
-                  RegExp(
-                      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'),
-                  'Invalid Password')
+                      RegExp(
+                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'),
+                      'Invalid Password')
                   .build(),
               obscureText: true,
-              decoration: authTextInputDecoration.copyWith(
-                  hintText: 'Password*'),
+              decoration:
+                  authTextInputDecoration.copyWith(hintText: 'Password*'),
               onChanged: (value) {
                 setState(() {
                   password = value;
@@ -78,34 +77,33 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
             ElevatedButton(
               onPressed: (isActive)
                   ? () async {
-                if (_formKey.currentState!.validate()) {
-                  context.read<RegisterCubit>().signUpRequested(
-                      email: context
-                          .read<RegisterCubit>()
-                          .state
-                          .email,
-                      password: password);
-                }
-              }
+                      if (_formKey.currentState!.validate()) {
+                        context.read<RegisterCubit>().signUpRequested(
+                            email: context.read<RegisterCubit>().state.email,
+                            password: password);
+                      }
+                    }
                   : null,
               style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: loading? const Loading():Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      'CONTINUE',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                    ),
-                  ],
-                ),
+                child: loading
+                    ? const Loading()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'CONTINUE',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.arrow_forward,
+                          ),
+                        ],
+                      ),
               ),
             ),
             TextButton(

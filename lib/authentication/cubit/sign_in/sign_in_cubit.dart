@@ -7,45 +7,44 @@ import 'package:equatable/equatable.dart';
 
 part 'sign_in_state.dart';
 
-
-class SignInCubit extends Cubit<SignInState>{
+class SignInCubit extends Cubit<SignInState> {
   final AuthRepository _authRepository;
-  late StreamSubscription<AuthenticationStatus> _authenticationStatusSubscription;
+  late StreamSubscription<AuthenticationStatus>
+      _authenticationStatusSubscription;
 
-  SignInCubit({required AuthRepository authRepository}):_authRepository=authRepository,
-  super(const SignInState.unknown()) {
-    _authenticationStatusSubscription = _authRepository.authStatus.listen(
-          (status) {
-          authenticationStatusChanged(status);
-        }
-    );
+  SignInCubit({required AuthRepository authRepository})
+      : _authRepository = authRepository,
+        super(const SignInState.unknown()) {
+    _authenticationStatusSubscription =
+        _authRepository.authStatus.listen((status) {
+      authenticationStatusChanged(status);
+    });
   }
 
   @override
-  Future<void> close(){
+  Future<void> close() {
     _authenticationStatusSubscription.cancel();
     return super.close();
   }
 
-  Future<void> signOutRequested()async{
+  Future<void> signOutRequested() async {
     _authRepository.signOut();
   }
 
-  Future<void> signInStarted({required String email, required String password})async{
+  Future<void> signInStarted(
+      {required String email, required String password}) async {
     emit(const SignInState.loading());
     String error = await _authRepository.signIn(email, password);
-    if(error==''){
+    if (error == '') {
       emit(SignInState.authenticated(
           _authRepository.getCurrentUser() as AuthUser));
-    }else{
-      emit(
-          SignInState.failed(error)
-      );
+    } else {
+      emit(SignInState.failed(error));
     }
   }
 
-  void authenticationStatusChanged(AuthenticationStatus status){
-    switch (status){
+  void authenticationStatusChanged(AuthenticationStatus status) {
+    switch (status) {
       case AuthenticationStatus.authenticated:
         emit(SignInState.authenticated(
             _authRepository.getCurrentUser() as AuthUser));
@@ -64,5 +63,4 @@ class SignInCubit extends Cubit<SignInState>{
         break;
     }
   }
-
 }

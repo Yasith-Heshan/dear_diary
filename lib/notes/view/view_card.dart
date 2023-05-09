@@ -6,8 +6,7 @@ class ViewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Note note =
-        ModalRoute.of(context)!.settings.arguments as Note;
+    Note note = ModalRoute.of(context)!.settings.arguments as Note;
     return Scaffold(
         backgroundColor: Colors.blue,
         appBar: AppBar(
@@ -25,10 +24,10 @@ class ViewCard extends StatelessWidget {
                   children: [
                     Text(
                       note.subtitle,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey[700],
-                        fontSize: 20
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.grey[700], fontSize: 20),
                     ),
                     const SizedBox(
                       height: 20,
@@ -36,8 +35,8 @@ class ViewCard extends StatelessWidget {
                     Text(
                       note.description,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.black,
-                      ),
+                            color: Colors.black,
+                          ),
                     )
                   ],
                 ),

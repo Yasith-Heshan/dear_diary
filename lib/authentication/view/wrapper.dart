@@ -11,22 +11,22 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (BuildContext context)=>SignInCubit(authRepository: RepositoryProvider.of<AuthRepository>(context)),
-        child: BlocBuilder<SignInCubit,SignInState>(
-
-          builder: (BuildContext context, state) {
-            switch(state.status){
-              case AuthenticationStatus.unknown:
-                return const SignIn();
-              case AuthenticationStatus.authenticated:
-                return const Home();
-              case AuthenticationStatus.unauthenticated:
-                return const SignIn();
-              case AuthenticationStatus.loading:
-                return const Loading();
-            }
-          },
-        ),
+      create: (BuildContext context) => SignInCubit(
+          authRepository: RepositoryProvider.of<AuthRepository>(context)),
+      child: BlocBuilder<SignInCubit, SignInState>(
+        builder: (BuildContext context, state) {
+          switch (state.status) {
+            case AuthenticationStatus.unknown:
+              return const SignIn();
+            case AuthenticationStatus.authenticated:
+              return const Home();
+            case AuthenticationStatus.unauthenticated:
+              return const SignIn();
+            case AuthenticationStatus.loading:
+              return const Loading();
+          }
+        },
+      ),
     );
   }
 }
