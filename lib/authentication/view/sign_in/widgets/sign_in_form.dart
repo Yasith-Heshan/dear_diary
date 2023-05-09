@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 import '../../../../shared/decorations.dart';
-import '../../../bloc/sign_in/sign_in_bloc.dart';
+import '../../../cubit/sign_in/sign_in_cubit.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    String error = context.read<SignInBloc>().state.error;
+    String error = context.read<SignInCubit>().state.error;
 
     return Form(
       key: _formKey,
@@ -70,7 +70,7 @@ class _SignInFormState extends State<SignInForm> {
             onPressed: (isActive)
                 ? () async {
                     if (_formKey.currentState!.validate()) {
-                      context.read<SignInBloc>().add(SignInStarted(email: email, password: password));
+                      context.read<SignInCubit>().signInStarted(email: email, password: password);
                     }
                   }
                 : null,

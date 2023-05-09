@@ -1,14 +1,10 @@
-import 'package:dear_diary/authentication/bloc/sign_in/sign_in_bloc.dart';
-import 'package:dear_diary/notes/bloc/note_bloc.dart';
+import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/notes/notes.dart';
 import 'package:dear_diary/repository/battery_repository.dart';
 import 'package:dear_diary/repository/notes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../battery_status/bloc/battery_bloc.dart';
-import '../widgets/add_card_form.dart';
-import '../widgets/battery_status.dart';
-import '../widgets/card_list.dart';
+import '../../battery_status/battery_status.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -54,7 +50,7 @@ class _HomeState extends State<Home> {
             onSelected: (String result) async {
               switch (result) {
                 case 'sign_out':
-                  context.read<SignInBloc>().add(SignOutRequested());
+                  context.read<SignInCubit>().signOutRequested();
                   break;
                 default:
               }
@@ -63,7 +59,7 @@ class _HomeState extends State<Home> {
             <PopupMenuEntry<String>>[
               PopupMenuItem<String>(
                   child: Text(
-                      context.read<SignInBloc>().state.authUser!.email.split('@')[0],
+                      context.read<SignInCubit>().state.authUser!.email.split('@')[0],
                   )
               ),
              const PopupMenuItem(child: Divider()),
@@ -82,15 +78,14 @@ class _HomeState extends State<Home> {
         value: _notesRepository,
         child: BlocProvider(
           create: (context) =>
-              NoteBloc(notesRepository: _notesRepository),
+              NoteCubit(notesRepository: _notesRepository),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BlocProvider(
                   create: (context) =>
-                  BatteryBloc(_batteryRepository)
-                    ..add(BatteryPercentageFetchingStarted()),
+                  BatteryCubit(_batteryRepository)..batteryPercentageFetchingStarted(),
                   child: const Padding(
                     padding: EdgeInsets.all(15.0),
                     child: BatteryStatus(),

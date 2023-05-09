@@ -1,4 +1,4 @@
-import 'package:dear_diary/authentication/view/signup/widgets/sign_up_password_form.dart';
+import 'package:dear_diary/authentication/authentication.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPassword extends StatefulWidget {

@@ -1,8 +1,7 @@
-import 'package:dear_diary/notes/bloc/note_bloc.dart';
+import 'package:dear_diary/notes/notes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/widgets/loading.dart';
-import 'card.dart';
 
 class DiaryCardsList extends StatefulWidget {
 
@@ -19,7 +18,7 @@ class _DiaryCardsListState extends State<DiaryCardsList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NoteBloc,NoteState>(
+    return BlocBuilder<NoteCubit,NoteState>(
         builder: (context,state){
           switch(state.status){
             case NoteStatus.initial:

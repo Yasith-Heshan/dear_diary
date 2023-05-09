@@ -1,4 +1,4 @@
-import 'package:dear_diary/battery_status/bloc/battery_bloc.dart';
+import 'package:dear_diary/battery_status/battery_status.dart';
 import 'package:dear_diary/shared/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class _BatteryStatusState extends State<BatteryStatus> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BatteryBloc, BatteryState>(
+    return BlocBuilder<BatteryCubit, BatteryState>(
       builder: (context, state) {
         String batteryLevel = 'Unknown battery level.';
         if(state.batteryPercentageFetchingStatus==BatteryPercentageFetchingStatus.initial){

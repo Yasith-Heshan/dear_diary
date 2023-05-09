@@ -6,20 +6,19 @@ import 'package:equatable/equatable.dart';
 
 import '../models/note.dart';
 
-part 'note_event.dart';
 part 'note_state.dart';
 
-class NoteBloc extends Bloc<NoteEvent, NoteState> {
+class NoteCubit extends Cubit<NoteState> {
   final NotesRepository _notesRepository;
   late StreamSubscription<List<Note>> _notesSubscription;
 
-  NoteBloc({required notesRepository}) :_notesRepository=notesRepository,
+  NoteCubit({required notesRepository}) :_notesRepository=notesRepository,
         super(const NoteState())
   {
-    on<NoteFetched>(_onNoteFetched);
-    on<NoteAddingStarted>(_onNoteAddingStarted);
-    _notesSubscription = _notesRepository.notes.listen(
-            (notes)=>add(NoteFetched(notes))
+      _notesSubscription = _notesRepository.notes.listen(
+            (notes) {
+              noteFetched(notes);
+            }
     );
   }
 
@@ -29,12 +28,12 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     return super.close();
   }
 
-  void _onNoteFetched(NoteFetched event, Emitter<NoteState> emit){
+  void noteFetched(List<Note> notes){
     try{
       emit(
         state.copyWith(
           status: NoteStatus.success,
-          notes: event.notes
+          notes: notes
         )
       );
     }catch(_){
@@ -42,9 +41,9 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     }
   }
 
-  Future<void> _onNoteAddingStarted(NoteAddingStarted event, Emitter<NoteState> emit)async{
+  Future<void> noteAddingStarted({required Note note})async{
     emit(state.copyWith(status: NoteStatus.loading));
-    String error = await _notesRepository.addNote(event.note);
+    String error = await _notesRepository.addNote(note);
     if(error!=''){
       emit(state.copyWith(
         notes: state.notes,

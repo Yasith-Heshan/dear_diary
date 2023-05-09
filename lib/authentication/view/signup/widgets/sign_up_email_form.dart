@@ -1,10 +1,10 @@
-import 'package:dear_diary/authentication/bloc/register/register_bloc.dart';
 import 'package:dear_diary/authentication/view/signup/sign_up_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 
 import '../../../../shared/decorations.dart';
+import '../../../cubit/register/register_cubit.dart';
 
 
 class SignUpEmailForm extends StatefulWidget {
@@ -27,7 +27,7 @@ class _SignUpEmailFormState extends State<SignUpEmailForm> {
         child: Column(
           children: <Widget>[
             TextFormField(
-              initialValue: context.read<RegisterBloc>().state.email,
+              initialValue: context.read<RegisterCubit>().state.email,
               validator: ValidationBuilder().email('Invalid Email').build(),
               decoration: authTextInputDecoration.copyWith(hintText: 'Email*'),
               onChanged: (value) {
@@ -44,10 +44,10 @@ class _SignUpEmailFormState extends State<SignUpEmailForm> {
               onPressed: (isActive)
                   ? () {
                 if (_formKey.currentState!.validate()) {
-                  context.read<RegisterBloc>().add(RegistrationStatusChanged(email!));
+                  context.read<RegisterCubit>().registrationStatusChanged(email!);
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_)=>BlocProvider.value(
-                      value: BlocProvider.of<RegisterBloc>(context),
+                      value: BlocProvider.of<RegisterCubit>(context),
                       child: const SignUpPassword(),
                     )
                     )

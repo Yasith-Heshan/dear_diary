@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 import '../../../../shared/decorations.dart';
 import '../../../../shared/widgets/loading.dart';
-import '../../../bloc/register/register_bloc.dart';
+import 'package:dear_diary/authentication/authentication.dart';
 
 class SignUpPasswordForm extends StatefulWidget {
   const SignUpPasswordForm({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RegisterBloc, RegisterState>(
+    return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) async {
         RegistrationStatus status = state.status;
         if (status == RegistrationStatus.succeeded) {
@@ -64,7 +64,7 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
             const SizedBox(
               height: 15,
             ),
-            BlocBuilder<RegisterBloc, RegisterState>(
+            BlocBuilder<RegisterCubit, RegisterState>(
               builder: (context, state) {
                 return Text(
                   state.error,
@@ -79,11 +79,12 @@ class _SignUpPasswordFormState extends State<SignUpPasswordForm> {
               onPressed: (isActive)
                   ? () async {
                 if (_formKey.currentState!.validate()) {
-                  context.read<RegisterBloc>().add(
-                      SignUpRequested(email: context
-                          .read<RegisterBloc>()
+                  context.read<RegisterCubit>().signUpRequested(
+                      email: context
+                          .read<RegisterCubit>()
                           .state
-                          .email, password: password));
+                          .email,
+                      password: password);
                 }
               }
                   : null,
