@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dear_diary/notes/bloc/note_bloc.dart';
-import 'package:flutter/foundation.dart';
-
 import '../notes/models/note.dart';
 
 
@@ -9,16 +6,16 @@ class NotesRepository{
   CollectionReference notesCollection =
   FirebaseFirestore.instance.collection('diary_cards');
 
-  Future<void> addNote(Note note) async {
+  Future<String> addNote(Note note) async {
     final dc = note.toMap();
-
+    String error = '';
     try {
-      await notesCollection.add(dc);
+     await notesCollection.add(dc);
     } catch (e) {
-      if (kDebugMode) {
-        print(e.toString());
+      error = 'Unexpected error';
       }
-      }
+
+      return error;
     }
 
 

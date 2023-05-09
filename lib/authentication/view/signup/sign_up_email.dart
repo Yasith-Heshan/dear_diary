@@ -2,6 +2,7 @@ import 'package:dear_diary/authentication/view/signup/widgets/sign_up_email_form
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../repository/auth_repository.dart';
 import '../../bloc/register/register_bloc.dart';
 
 class SignUpEmail extends StatefulWidget {
@@ -15,7 +16,7 @@ class _SignUpEmailState extends State<SignUpEmail> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterBloc(),
+      create: (context) => RegisterBloc(RepositoryProvider.of<AuthRepository>(context)),
       child: Scaffold(
         backgroundColor: Colors.blue,
         body: Padding(

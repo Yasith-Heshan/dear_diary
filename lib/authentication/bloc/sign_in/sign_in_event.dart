@@ -9,5 +9,11 @@ class _AuthenticationStatusChanged extends SignInEvent{
 
   const _AuthenticationStatusChanged(this.status);
 }
+class SignInStarted extends SignInEvent{
+  final String email;
+  final String password;
 
-class LogoutRequested extends SignInEvent{}
+  SignInStarted({required this.email, required this.password});
+
+}
+class SignOutRequested extends SignInEvent{}

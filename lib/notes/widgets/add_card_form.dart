@@ -1,8 +1,9 @@
 import 'package:dear_diary/authentication/bloc/sign_in/sign_in_bloc.dart';
 import 'package:dear_diary/authentication/model/auth_user.dart';
+import 'package:dear_diary/notes/bloc/note_bloc.dart';
 import 'package:dear_diary/notes/models/note.dart';
-import 'package:dear_diary/repository/notes_repository.dart';
 import 'package:dear_diary/shared/decorations.dart';
+import 'package:dear_diary/shared/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +41,7 @@ class AddCardFormState extends State<AddCardForm> {
   @override
   Widget build(BuildContext context) {
     final AuthUser authUser = context.read<SignInBloc>().state.authUser!;
-    String email = authUser!.email;
+    String email = authUser.email;
     subtitle = email.split('@')[0];
 
     return Form(
@@ -83,32 +84,37 @@ class AddCardFormState extends State<AddCardForm> {
                   description = value;
                 });
               },
-              decoration: noteInputDecoration.copyWith(
-                hintText: 'Enter Description'
-              ),
+              decoration:
+                  noteInputDecoration.copyWith(hintText: 'Enter Description'),
             ),
             const SizedBox(
               height: 10,
             ),
-            ElevatedButton(
-              onPressed: () {
-                if(_formKey.currentState!.validate()){
-                  NotesRepository notesRepository = NotesRepository();
-                  Note note = Note(
-                      title: title, subtitle: subtitle, description: description);
-                  notesRepository.addNote(note);
-                  clearText();
-                }
+            BlocBuilder<NoteBloc, NoteState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Note note = Note(
+                          title: title,
+                          subtitle: subtitle,
+                          description: description);
+                      context
+                          .read<NoteBloc>()
+                          .add(NoteAddingStarted(note: note));
+                      clearText();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      minimumSize: const Size(double.infinity, 40)),
+                  child: state.status==NoteStatus.loading? const Loading(): const Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 18, color: Colors.black),
+                  ),
+                );
               },
-              style: ElevatedButton.styleFrom(
-                  shape: const StadiumBorder(),
-                  minimumSize: const Size(double.infinity, 40)),
-              child: const Text(
-                'Submit',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
             ),
-
           ],
         ),
       ),

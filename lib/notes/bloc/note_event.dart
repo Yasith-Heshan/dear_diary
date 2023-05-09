@@ -12,8 +12,15 @@ class NoteFetched extends NoteEvent{
 
 class NoteAddingStarted extends NoteEvent{
   final Note note;
-
   NoteAddingStarted({required this.note});
+}
+
+class NoteAddingFailed extends NoteEvent{
+  final String error;
+
+  NoteAddingFailed({required this.error});
+
 
 }
+
 

@@ -10,3 +10,12 @@ class RegistrationStatusChanged extends RegisterEvent{
   RegistrationStatusChanged(this.email);
 
 }
+
+class SignUpRequested extends RegisterEvent{
+  final String email;
+  final String password;
+
+  SignUpRequested({required this.email, required this.password});
+
+
+}

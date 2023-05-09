@@ -1,9 +1,8 @@
-import 'package:dear_diary/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 import '../../../../shared/decorations.dart';
-import '../../../../shared/widgets/loading.dart';
+import '../../../bloc/sign_in/sign_in_bloc.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -16,13 +15,14 @@ class _SignInFormState extends State<SignInForm> {
   String email = '';
   String password = '';
   bool isActive = false;
-  bool loading = false;
-  String error = "";
+
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    String error = context.read<SignInBloc>().state.error;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -32,7 +32,6 @@ class _SignInFormState extends State<SignInForm> {
             decoration: authTextInputDecoration.copyWith(hintText: 'Email*'),
             onChanged: (value) {
               setState(() {
-                error = "";
                 email = value;
                 isActive = _formKey.currentState!.validate();
               });
@@ -52,7 +51,6 @@ class _SignInFormState extends State<SignInForm> {
             decoration: authTextInputDecoration.copyWith(hintText: 'Password*'),
             onChanged: (value) {
               setState(() {
-                error = "";
                 password = value;
                 isActive = _formKey.currentState!.validate() ? true : false;
               });
@@ -72,28 +70,12 @@ class _SignInFormState extends State<SignInForm> {
             onPressed: (isActive)
                 ? () async {
                     if (_formKey.currentState!.validate()) {
-                      setState(() {
-                        loading = true;
-                      });
-                      String errorMsg =
-                          await RepositoryProvider.of<AuthRepository>(context).signIn(email, password);
-                      if (errorMsg != '') {
-                        setState(() {
-                          loading = false;
-                          error = errorMsg;
-                        });
-                      } else {
-                        if (!mounted) return;
-                        await Navigator.pushReplacementNamed(
-                            context, '/');
-                      }
+                      context.read<SignInBloc>().add(SignInStarted(email: email, password: password));
                     }
                   }
                 : null,
             style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-            child: loading
-                ? const Loading()
-                : Padding(
+            child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

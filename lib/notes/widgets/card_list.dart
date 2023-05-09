@@ -43,6 +43,10 @@ class _DiaryCardsListState extends State<DiaryCardsList> {
               return const Center(
                 child: Text('failed to fetch Notes'),
               );
+            case NoteStatus.loading:
+              return const Center(
+                child: Loading(),
+              );
           }
         }
 

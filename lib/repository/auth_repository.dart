@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../authentication/model/auth_user.dart';
 
 
-enum AuthenticationStatus {unknown, authenticated, unauthenticated}
+enum AuthenticationStatus {unknown,loading, authenticated, unauthenticated}
 
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -23,6 +23,9 @@ class AuthRepository {
     return authUser;
   }
 
+  Future<void> signOut()async{
+    await _auth.signOut();
+  }
 
   Future<String> signIn(String email, String password) async {
     try {

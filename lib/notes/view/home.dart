@@ -1,7 +1,7 @@
+import 'package:dear_diary/authentication/bloc/sign_in/sign_in_bloc.dart';
 import 'package:dear_diary/notes/bloc/note_bloc.dart';
 import 'package:dear_diary/repository/battery_repository.dart';
 import 'package:dear_diary/repository/notes_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,13 +54,19 @@ class _HomeState extends State<Home> {
             onSelected: (String result) async {
               switch (result) {
                 case 'sign_out':
-                  await FirebaseAuth.instance.signOut();
+                  context.read<SignInBloc>().add(SignOutRequested());
                   break;
                 default:
               }
             },
             itemBuilder: (BuildContext context) =>
             <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                  child: Text(
+                      context.read<SignInBloc>().state.authUser!.email.split('@')[0],
+                  )
+              ),
+             const PopupMenuItem(child: Divider()),
               const PopupMenuItem<String>(
                 value: 'sign_out',
                 child: Text('Sign Out'),
