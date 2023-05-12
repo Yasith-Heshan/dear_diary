@@ -8,13 +8,22 @@ part 'battery_state.dart';
 
 class BatteryCubit extends Cubit<BatteryState> {
   final BatteryRepository _batteryRepository;
-
+  late StreamSubscription _streamSubscription;
   BatteryCubit(this._batteryRepository)
       : super(const BatteryState(
             batteryPercentage: 0,
             batteryPercentageFetchingStatus:
                 BatteryPercentageFetchingStatus.initial,
-            error: ''));
+            error: '')){
+    _streamSubscription = Stream.periodic(const Duration(minutes: 1)).listen(
+            (event) => batteryPercentageFetchingStarted()
+    );
+  }
+  @override
+  Future<void> close() {
+    _streamSubscription.cancel();
+    return super.close();
+  }
 
   Future<void> batteryPercentageFetchingStarted() async {
     final int batteryPercentage = await _batteryRepository.getBatteryLevel();

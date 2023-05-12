@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../repository/auth_repository.dart';
-import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/authentication/authentication.dart' show RegisterCubit,SignUpEmailForm;
 
 class SignUpEmail extends StatefulWidget {
   const SignUpEmail({Key? key}) : super(key: key);
