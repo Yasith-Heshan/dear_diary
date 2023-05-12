@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 
 class BatteryRepository {
@@ -9,10 +11,11 @@ class BatteryRepository {
       final int result = await platform.invokeMethod('getBatteryLevel');
       batteryLevel = result;
       // batteryLevel = 'Battery Percentage: $result %';
-    } on PlatformException catch (e) {
+    } on PlatformException {
       // batteryLevel = "Failed to get battery level: '${e.message}'.";
       batteryLevel = -1;
     }
     return batteryLevel;
   }
+
 }

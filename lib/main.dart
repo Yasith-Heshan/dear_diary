@@ -1,13 +1,10 @@
 import 'package:dear_diary/notes/view/view_card.dart';
 import 'package:dear_diary/repository/auth_repository.dart';
-import 'package:dear_diary/authentication/wrapper.dart';
 import 'package:dear_diary/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'authentication/view/sign_in/sign_in.dart';
-import 'authentication/view/signup/sign_up_email.dart';
-import 'authentication/view/signup/sign_up_password.dart';
+import 'authentication/authentication.dart';
 import 'firebase_options.dart';
 
 void main() async {

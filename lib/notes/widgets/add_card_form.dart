@@ -1,7 +1,5 @@
-import 'package:dear_diary/authentication/bloc/sign_in/sign_in_bloc.dart';
-import 'package:dear_diary/authentication/model/auth_user.dart';
-import 'package:dear_diary/notes/bloc/note_bloc.dart';
-import 'package:dear_diary/notes/models/note.dart';
+import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/notes/notes.dart';
 import 'package:dear_diary/shared/decorations.dart';
 import 'package:dear_diary/shared/widgets/loading.dart';
 import 'package:flutter/material.dart';

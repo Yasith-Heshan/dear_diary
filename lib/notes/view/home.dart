@@ -1,14 +1,10 @@
-import 'package:dear_diary/authentication/bloc/sign_in/sign_in_bloc.dart';
-import 'package:dear_diary/notes/bloc/note_bloc.dart';
+import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/notes/notes.dart';
 import 'package:dear_diary/repository/battery_repository.dart';
 import 'package:dear_diary/repository/notes_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../battery_status/bloc/battery_bloc.dart';
-import '../widgets/add_card_form.dart';
-import '../widgets/battery_status.dart';
-import '../widgets/card_list.dart';
+import '../../battery_status/battery_status.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,7 +16,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late final NotesRepository _notesRepository;
   late final BatteryRepository _batteryRepository;
-
 
   @override
   void initState() {
@@ -37,10 +32,7 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         title: Text(
           'Home',
-          style: Theme
-              .of(context)
-              .textTheme
-              .headlineMedium,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         actions: [
           IconButton(
@@ -59,14 +51,12 @@ class _HomeState extends State<Home> {
                 default:
               }
             },
-            itemBuilder: (BuildContext context) =>
-            <PopupMenuEntry<String>>[
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               PopupMenuItem<String>(
                   child: Text(
-                      context.read<SignInBloc>().state.authUser!.email.split('@')[0],
-                  )
-              ),
-             const PopupMenuItem(child: Divider()),
+                context.read<SignInBloc>().state.authUser!.email.split('@')[0],
+              )),
+              const PopupMenuItem(child: Divider()),
               const PopupMenuItem<String>(
                 value: 'sign_out',
                 child: Text('Sign Out'),
@@ -81,15 +71,13 @@ class _HomeState extends State<Home> {
       body: RepositoryProvider.value(
         value: _notesRepository,
         child: BlocProvider(
-          create: (context) =>
-              NoteBloc(notesRepository: _notesRepository),
+          create: (context) => NoteBloc(notesRepository: _notesRepository),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BlocProvider(
-                  create: (context) =>
-                  BatteryBloc(_batteryRepository)
+                  create: (context) => BatteryBloc(_batteryRepository)
                     ..add(BatteryPercentageFetchingStarted()),
                   child: const Padding(
                     padding: EdgeInsets.all(15.0),

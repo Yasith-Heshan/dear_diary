@@ -9,6 +9,7 @@ part 'battery_state.dart';
 
 class BatteryBloc extends Bloc<BatteryEvent, BatteryState> {
   final BatteryRepository _batteryRepository;
+  late StreamSubscription _streamSubscription;
 
   BatteryBloc(this._batteryRepository) : super(const BatteryState(
       batteryPercentage: 0,
@@ -17,6 +18,16 @@ class BatteryBloc extends Bloc<BatteryEvent, BatteryState> {
     on<BatteryPercentageFetchingStarted>(_onBatteryPercentageFetchingStart);
     on<BatteryPercentageFetchingFailed>(_onBatteryPercentageFetchingFailed);
     on<BatteryPercentageFetchingSucceeded>(_onBatteryPercentageFetchingSucceeded);
+    _streamSubscription = Stream.periodic(const Duration(minutes: 1)).listen(
+            (event) => add(BatteryPercentageFetchingStarted())
+    );
+  }
+
+
+  @override
+  Future<void> close() {
+    _streamSubscription.cancel();
+    return super.close();
   }
 
 

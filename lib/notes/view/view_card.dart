@@ -1,4 +1,4 @@
-import 'package:dear_diary/notes/models/note.dart';
+import 'package:dear_diary/notes/notes.dart';
 import 'package:flutter/material.dart';
 
 class ViewCard extends StatelessWidget {

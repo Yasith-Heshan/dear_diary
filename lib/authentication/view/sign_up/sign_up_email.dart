@@ -1,9 +1,8 @@
-import 'package:dear_diary/authentication/view/signup/widgets/sign_up_email_form.dart';
+import 'package:dear_diary/authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repository/auth_repository.dart';
-import '../../bloc/register/register_bloc.dart';
 
 class SignUpEmail extends StatefulWidget {
   const SignUpEmail({Key? key}) : super(key: key);
