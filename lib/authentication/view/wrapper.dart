@@ -1,4 +1,4 @@
-import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/authentication/authentication.dart' show SignInCubit, SignIn,SignInState;
 import 'package:dear_diary/repository/auth_repository.dart';
 import 'package:dear_diary/shared/widgets/loading.dart';
 import 'package:flutter/material.dart';

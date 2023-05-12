@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 import '../../../../shared/decorations.dart';
-import '../../../cubit/sign_in/sign_in_cubit.dart';
+import 'package:dear_diary/authentication/authentication.dart' show SignInCubit;
+
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);

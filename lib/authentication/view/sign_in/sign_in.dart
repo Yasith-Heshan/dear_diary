@@ -1,4 +1,4 @@
-import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/authentication/authentication.dart' show SignInForm;
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {

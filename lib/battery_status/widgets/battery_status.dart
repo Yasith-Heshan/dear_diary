@@ -1,4 +1,4 @@
-import 'package:dear_diary/battery_status/battery_status.dart';
+import 'package:dear_diary/battery_status/battery_status.dart' show BatteryCubit, BatteryPercentageFetchingStatus, BatteryState;
 import 'package:dear_diary/shared/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

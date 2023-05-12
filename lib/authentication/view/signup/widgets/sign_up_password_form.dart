@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
 import '../../../../shared/decorations.dart';
 import '../../../../shared/widgets/loading.dart';
-import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/authentication/authentication.dart' show RegisterCubit,RegisterState, RegistrationStatus;
 
 class SignUpPasswordForm extends StatefulWidget {
   const SignUpPasswordForm({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/authentication/authentication.dart' show SignUpPasswordForm;
 import 'package:flutter/material.dart';
 
 class SignUpPassword extends StatefulWidget {

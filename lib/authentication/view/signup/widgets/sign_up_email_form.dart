@@ -1,10 +1,9 @@
-import 'package:dear_diary/authentication/view/signup/sign_up_password.dart';
+import 'package:dear_diary/authentication/authentication.dart' show RegisterCubit, SignUpPassword;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
-
 import '../../../../shared/decorations.dart';
-import '../../../cubit/register/register_cubit.dart';
+
 
 class SignUpEmailForm extends StatefulWidget {
   const SignUpEmailForm({Key? key}) : super(key: key);
