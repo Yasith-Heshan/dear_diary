@@ -1,7 +1,5 @@
-import 'package:dear_diary/authentication/bloc/sign_in/sign_in_bloc.dart';
-import 'package:dear_diary/authentication/view/sign_in/widgets/sign_in_form.dart';
+import 'package:dear_diary/authentication/authentication.dart' show SignInForm;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

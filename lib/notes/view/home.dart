@@ -1,5 +1,5 @@
-import 'package:dear_diary/authentication/authentication.dart';
-import 'package:dear_diary/notes/notes.dart';
+import 'package:dear_diary/authentication/authentication.dart' show SignInBloc, SignOutRequested;
+import 'package:dear_diary/notes/notes.dart' show NoteBloc, AddCardForm, DiaryCardsList;
 import 'package:dear_diary/repository/battery_repository.dart';
 import 'package:dear_diary/repository/notes_repository.dart';
 import 'package:flutter/material.dart';

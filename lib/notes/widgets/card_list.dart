@@ -1,4 +1,4 @@
-import 'package:dear_diary/notes/notes.dart';
+import 'package:dear_diary/notes/notes.dart' show CardWidget, NoteBloc,NoteState,NoteStatus;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/widgets/loading.dart';

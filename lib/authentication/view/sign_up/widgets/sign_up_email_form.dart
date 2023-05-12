@@ -1,8 +1,7 @@
-import 'package:dear_diary/authentication/authentication.dart';
+import 'package:dear_diary/authentication/authentication.dart' show RegisterBloc, RegistrationStatusChanged,SignUpPassword;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
-
 import '../../../../shared/decorations.dart';
 
 
