@@ -1,3 +1,4 @@
+import 'package:dear_diary/notes/bloc/note_bloc.dart';
 import 'package:dear_diary/notes/notes.dart' show CardWidget, NoteBloc,NoteState,NoteStatus;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +16,11 @@ class DiaryCardsList extends StatefulWidget {
 class _DiaryCardsListState extends State<DiaryCardsList> {
   List<CardWidget> diaryCards = [];
 
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NoteBloc,NoteState>(
         builder: (context,state){
+          // context.read<NoteBloc>().add(NoteFetchingStarted());
           switch(state.status){
             case NoteStatus.initial:
               return const Center(

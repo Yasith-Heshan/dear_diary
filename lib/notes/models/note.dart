@@ -23,6 +23,14 @@ class Note extends Equatable{
     };
   }
 
+  factory Note.fromJson(Map<String, dynamic>json){
+    return Note(
+        title: json['title'],
+        subtitle: json['subtitle'],
+        description: json['description']
+    );
+  }
+
   @override
   // TODO: implement props
   List<Object?> get props => [title, subtitle, description];
