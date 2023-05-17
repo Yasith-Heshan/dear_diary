@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dear_diary/notes/view/view_card.dart';
 import 'package:dear_diary/repository/auth_repository.dart';
 import 'package:dear_diary/shared/theme.dart';
@@ -8,6 +9,7 @@ import 'authentication/authentication.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

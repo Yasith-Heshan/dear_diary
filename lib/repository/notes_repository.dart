@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../notes/models/note.dart' show Note;
 import 'package:http/http.dart' as http;
 
@@ -34,8 +35,7 @@ class NotesRepository{
   }
   
   Future<List<Note>> fetchNotes()async{
-    final response = await http.get(Uri.parse('https://646272234dca1a6613469855.mockapi.io/note'));
-
+    final response = await http.get(Uri.parse(dotenv.env['REST_API_URL']!));
 
     if(response.statusCode == 200){
        final fetched =  jsonDecode(response.body) as List;
