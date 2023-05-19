@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../notes/models/note.dart';
+import '../models/note.dart';
 
 
 class NotesRepository{

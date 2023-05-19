@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../authentication/model/auth_user.dart';
+import '../models/auth_user.dart';
 
 
 enum AuthenticationStatus {unknown,loading, authenticated, unauthenticated}
